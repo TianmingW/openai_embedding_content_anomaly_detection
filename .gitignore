@@ -1,0 +1,11 @@
+.DS_Store
+.ipynb_checkpoints/
+ContentClassifier.ipynb
+NLP practice/
+data/
+drafts/
+embeddings_2/
+prompts_tutorial_wu_enda/
+review_data/
+temp.csv
+
