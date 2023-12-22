@@ -3,8 +3,10 @@
 NLP practice/
 data/
 drafts/
-embeddings_2/
 prompts_tutorial_wu_enda/
 review_data/
 temp.csv
+embeddings/
+embeddings_2/
+test_payload/
 
