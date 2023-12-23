@@ -1,0 +1,11 @@
+/localscratch/spool/slurmd/job20930179/slurm_script: line 9: cd~//home/timi001/projects/def-wkui/timi001/embedding_detection/openai_embedding_content_anomaly_detection: No such file or directory
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) CCconfig         4) imkl/2020.1.217    7) libfabric/1.10.1
+  2) gentoo/2020      5) intel/2020.1.217   8) openmpi/4.0.3
+  3) gcccore/.9.3.0   6) ucx/1.8.0          9) StdEnv/2020
+Traceback (most recent call last):
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/content_classifier.py", line 2, in <module>
+    import tensorflow as tf
+ModuleNotFoundError: No module named 'tensorflow'
