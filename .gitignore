@@ -12,3 +12,4 @@ test_payload/
 tensorflow/
 training_acc*.png
 acc_loss*.png
+plot_result.ipynb
