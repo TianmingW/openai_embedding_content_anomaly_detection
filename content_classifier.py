@@ -57,4 +57,4 @@ history = model.fit(
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
-history_df.to_csv('./results/history_fullsets_1.csv', index=False)
+history_df.to_csv('./results/history_fullsets_2.csv', index=False)
