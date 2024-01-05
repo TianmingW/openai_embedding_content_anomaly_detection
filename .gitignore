@@ -10,5 +10,5 @@ embeddings/
 embeddings_2/
 test_payload/
 tensorflow/
-plot_result.ipynb
 training_acc*.png
+acc_loss*.png
