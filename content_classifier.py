@@ -7,6 +7,8 @@ from keras.layers import Dropout
 from keras.preprocessing import sequence
 from keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
+from tensorflow.keras.callbacks import Callback
+from sklearn.metrics import confusion_matrix
 import os
 import glob
 import numpy as np
@@ -38,6 +40,24 @@ early_stopping = EarlyStopping(
     restore_best_weights=True  # Restore model weights from the epoch with the best value of the monitored quantity
 )
 
+class ConfusionMatrixCallback(Callback):
+    def __init__(self, X_val, y_val):
+        super().__init__()
+        self.X_val = X_val
+        self.y_val = y_val
+    def on_epoch_end(self, epoch, logs={}):
+        y_pred = self.model.predict(self.X_val)
+        y_pred_classes = (y_pred > 0.5).astype('int32')  # Convert probabilities to binary labels
+        cm = confusion_matrix(self.y_val, y_pred_classes)
+        TN, FP, FN, TP = cm.ravel()
+
+        # Store the values in the logs dictionary
+        logs['val_TN'] = TN
+        logs['val_FP'] = FP
+        logs['val_FN'] = FN
+        logs['val_TP'] = TP
+cm_callback = ConfusionMatrixCallback(X_test_3d, y_test)
+
 # Train the model
 model = Sequential()
 model.add(LSTM(100))
@@ -45,16 +65,14 @@ model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-history = model.fit(
-    X_train_3d, 
-    y_train, 
-    epochs=50, 
-    batch_size=64,
-    shuffle=True, 
-    validation_data=(X_test_3d, y_test),
-    callbacks=[early_stopping]
-    )
+history = model.fit(X_train_3d, 
+                    y_train, 
+                    epochs=5, 
+                    batch_size=64,
+                    shuffle=True, 
+                    validation_data=(X_test_3d, y_test),
+                    callbacks=[early_stopping, cm_callback])
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
-history_df.to_csv('./results/history_fullsets_2.csv', index=False)
+history_df.to_csv('./results/history_fullsets_w_cm_1.csv', index=False)

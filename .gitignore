@@ -10,6 +10,6 @@ embeddings/
 embeddings_2/
 test_payload/
 tensorflow/
-training_acc*.png
-acc_loss*.png
+graphs/
 plot_result.ipynb
+iot2023/
