@@ -67,7 +67,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 
 history = model.fit(X_train_3d, 
                     y_train, 
-                    epochs=5, 
+                    epochs=50, 
                     batch_size=64,
                     shuffle=True, 
                     validation_data=(X_test_3d, y_test),
@@ -75,4 +75,4 @@ history = model.fit(X_train_3d,
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
-history_df.to_csv('./results/history_fullsets_w_cm_1.csv', index=False)
+history_df.to_csv('./results/history_fullsets_w_cm_2.csv', index=False)
