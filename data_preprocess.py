@@ -14,7 +14,7 @@ def tokenizer_payload(hex_string, token_length = 4):
     regex_pattern = '.{1,' + str(token_length) + '}'
     return ' '.join(re.findall(regex_pattern, hex_string))
 
-client = OpenAI()
+
 
 def get_embedding(text, model="text-embedding-ada-002"):
    text = text.replace("\n", " ")
@@ -36,16 +36,17 @@ def get_embeddings_from_payload(csv_file, benign = True, embedding_model = "text
         df_embedding["y"] = 1
     df_embedding.to_csv(save_prefix+filename, index=False)
     return 0
+if __name__ == "__main__":
+    client = OpenAI()
+    # Set the folder path
+    folder_path = './iot2023_csv/'  # Replace with your folder path
+    save_path = "./iot_2023_embeddings/"
 
-# Set the folder path
-folder_path = './iot2023/'  # Replace with your folder path
-save_path = "./iot_2023_embeddings/"
-
-# Iterate over all CSV files in the folder
-for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
-    filename = os.path.basename(csv_file)
-    print(f"Processing file: {csv_file}")
-    if 'Mirai' in filename:
-        get_embeddings_from_payload(csv_file, benign=False, save_prefix=save_path)
-    else:
-        get_embeddings_from_payload(csv_file, benign=True, save_prefix=save_path)
+    # Iterate over all CSV files in the folder
+    for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
+        filename = os.path.basename(csv_file)
+        print(f"Processing file: {csv_file}")
+        if 'Mirai' in filename:    
+            get_embeddings_from_payload(csv_file, benign=False, save_prefix=save_path)
+        else:
+            get_embeddings_from_payload(csv_file, benign=True, save_prefix=save_path)
