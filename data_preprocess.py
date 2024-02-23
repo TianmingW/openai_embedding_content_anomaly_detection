@@ -2,6 +2,7 @@ import sys
 sys.path.append('./utils')
 import os
 import glob
+import tiktoken
 
 import pandas as pd
 import re
@@ -27,6 +28,14 @@ def get_embeddings_from_payload(csv_file, benign = True, embedding_model = "text
     df.dropna(subset = ['tcp.payload'], inplace=True)
 
     df['tokenizer_content'] = df['tcp.payload'].apply(tokenizer_payload)
+    # print("stop")
+    # print(df.iloc[0]['tokenizer_content'])
+    # print(df.iloc[0]['tcp.payload'])
+
+    encoding = tiktoken.get_encoding(embedding_encoding)
+    df["n_tokens"] = df.tokenizer_content.apply(lambda x: len(encoding.encode(x)))
+    # df = df[df.n_tokens <= max_tokens].tail(top_n)
+    df = df[df.n_tokens <= max_tokens]
 
     df_embedding = pd.DataFrame()
     df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
@@ -38,12 +47,16 @@ def get_embeddings_from_payload(csv_file, benign = True, embedding_model = "text
     return 0
 if __name__ == "__main__":
     client = OpenAI()
+    embedding_encoding = "cl100k_base"
+    max_tokens = 8000
+    # top_n = 100
     # Set the folder path
-    folder_path = './iot2023_csv/'  # Replace with your folder path
+    folder_path = './iot_2023_csv/'  # Replace with your folder path
     save_path = "./iot_2023_embeddings/"
 
     # Iterate over all CSV files in the folder
     for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
+        # print("in loop.")
         filename = os.path.basename(csv_file)
         print(f"Processing file: {csv_file}")
         if 'Mirai' in filename:    

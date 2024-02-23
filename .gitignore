@@ -13,5 +13,6 @@ tensorflow/
 graphs/
 plot_result.ipynb
 iot2023_full/
+iot2023/
 iot23/
 self_data_cc_log/
