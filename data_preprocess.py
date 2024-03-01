@@ -54,7 +54,7 @@ if __name__ == "__main__":
     folder_path = './iot_2023_csv/'  # Replace with your folder path
     save_path = "./iot_2023_embeddings/"
 
-    # Iterate over all CSV files in the folder
+    # Iterate over all CSV files in the folders
     for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
         # print("in loop.")
         filename = os.path.basename(csv_file)

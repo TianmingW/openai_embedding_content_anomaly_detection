@@ -1,0 +1,41 @@
+Lmod Warning: Warning, April 3rd 2024, the default standard environment module
+will be changed to a more recent one.
+To test your jobs with the new environment, please run:
+module load StdEnv/2023
+
+To change your default version immediately, please run the following command:
+
+echo "module-version StdEnv/2023 default" >> $HOME/.modulerc
+
+For more information, please see:
+https://docs.computecanada.ca/wiki/Standard_software_environments 
+While processing the following module(s):
+    Module fullname  Module Filename
+    ---------------  ---------------
+    StdEnv/2020      /cvmfs/soft.computecanada.ca/custom/modules/StdEnv/2020.lua
+
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) CCconfig         4) imkl/2020.1.217    7) libfabric/1.10.1
+  2) gentoo/2020      5) intel/2020.1.217   8) openmpi/4.0.3
+  3) gcccore/.9.3.0   6) ucx/1.8.0          9) StdEnv/2020
+Processing file: ./iot_2023_csv/BenignTraffic3_2.csv
+Traceback (most recent call last):
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/data_preprocess.py", line 65, in <module>
+    get_embeddings_from_payload(csv_file, benign=True, save_prefix=save_path)
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/data_preprocess.py", line 46, in get_embeddings_from_payload
+    df_embedding.to_csv(save_prefix+filename, index=False)
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Core/scipy-stack/2023b/lib/python3.11/site-packages/pandas/core/generic.py", line 3902, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Core/scipy-stack/2023b/lib/python3.11/site-packages/pandas/io/formats/format.py", line 1152, in to_csv
+    csv_formatter.save()
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Core/scipy-stack/2023b/lib/python3.11/site-packages/pandas/io/formats/csvs.py", line 247, in save
+    with get_handle(
+         ^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Core/scipy-stack/2023b/lib/python3.11/site-packages/pandas/io/common.py", line 739, in get_handle
+    check_parent_directory(str(handle))
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2020/avx2/Core/scipy-stack/2023b/lib/python3.11/site-packages/pandas/io/common.py", line 604, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: 'iot_2023_embeddings'
