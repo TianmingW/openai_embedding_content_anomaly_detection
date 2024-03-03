@@ -46,7 +46,7 @@ def get_embeddings_from_payload(csv_file, benign = True, embedding_model = "text
     df_embedding.to_csv(save_prefix+filename, index=False)
     return 0
 if __name__ == "__main__":
-    client = OpenAI()
+    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
     embedding_encoding = "cl100k_base"
     max_tokens = 8000
     # top_n = 100

@@ -16,7 +16,7 @@ import numpy as np
 # Prepare the datasets
 data_set = pd.DataFrame()
 all_df = []
-folder_path = "./embeddings_2/"
+folder_path = "./iot_2023_embeddings/"
 for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
     df_temp = pd.read_csv(csv_file)
     df_temp["X"] = df_temp.X.apply(eval).apply(np.array)
@@ -75,4 +75,4 @@ history = model.fit(X_train_3d,
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
-history_df.to_csv('./results/history_fullsets_w_cm_5.csv', index=False)
+history_df.to_csv('./result_public_data/cm_1.csv', index=False)
