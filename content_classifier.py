@@ -75,4 +75,4 @@ history = model.fit(X_train_3d,
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
-history_df.to_csv('./result_public_data/cm_1.csv', index=False)
+history_df.to_csv('./result_public_data/cm_2.csv', index=False)
