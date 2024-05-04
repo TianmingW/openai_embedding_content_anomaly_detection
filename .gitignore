@@ -20,3 +20,4 @@ self_data_cc_log/
 pyscipy/
 public_cc_log/
 DoS_tcp_flood_csv/
+DoS_tcp_flood_embedding/
