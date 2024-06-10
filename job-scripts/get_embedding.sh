@@ -7,8 +7,9 @@
 #SBATCH --mail-type=ALL
 
 cd $project/embedding_detection/openai_embedding_content_anomaly_detection
-module purge
-module load python/3.11 scipy-stack
+# module purge
 source ./pyscipy/bin/activate
+# module load python/3.11 scipy-stack
+# source ./pyscipy/bin/activate
 
 python data_preprocess.py

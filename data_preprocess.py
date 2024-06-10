@@ -51,15 +51,15 @@ if __name__ == "__main__":
     max_tokens = 8000
     # top_n = 100
     # Set the folder path
-    folder_path = './iot_2023_csv/'  # Replace with your folder path
-    save_path = "./iot_2023_embeddings/"
+    folder_path = './DoS_tcp_flood_csv/'  # Replace with your folder path
+    save_path = "./DoS_tcp_flood_embedding/"
 
     # Iterate over all CSV files in the folders
     for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
         # print("in loop.")
         filename = os.path.basename(csv_file)
         print(f"Processing file: {csv_file}")
-        if 'Mirai' in filename:    
+        if 'Mirai' in filename or 'DoS' in filename:    
             get_embeddings_from_payload(csv_file, benign=False, save_prefix=save_path)
         else:
             get_embeddings_from_payload(csv_file, benign=True, save_prefix=save_path)
