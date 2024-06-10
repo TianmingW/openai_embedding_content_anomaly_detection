@@ -14,6 +14,7 @@ graphs/
 plot_result.ipynb
 iot2023_full/
 iot2023/
+iot_2023_csv/
 iot_2023_embeddings/
 iot23/
 self_data_cc_log/
@@ -22,3 +23,4 @@ public_cc_log/
 DoS_tcp_flood_csv/
 py310/
 DoS_tcp_flood_embedding/
+iot_23_embeddings/

@@ -43,20 +43,10 @@ def get_embeddings_from_payload(csv_file, benign = True, embedding_model = "text
         df_embedding["y"] = 1
     df_embedding.to_csv(save_prefix+filename, index=False)
     return 0
-if __name__ == "__main__":
-    dir = "/Users/timmy/Desktop/iot_23/Malware-Project/BigDataset/IoTScenarios/"
-    sub_dir_list = [
-        "CTU-IoT-Malware-Capture-34-1/",
-        "CTU-IoT-Malware-Capture-43-1/",
-        "CTU-IoT-Malware-Capture-44-1/",
-        "CTU-IoT-Malware-Capture-49-1/",
-        "CTU-IoT-Malware-Capture-52-1/",
-        "CTU-IoT-Malware-Capture-35-1/",
-        "CTU-IoT-Malware-Capture-48-1/"
-        ]
-    # the pcap file's name is not consistant
-    flow_info_dir = "/bro/conn.log.labeled"
 
+if __name__ == "__main__":
+    dir = "./iot23/"
+    flow_info_dir = "/bro/conn.log.labeled"
 
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"),)
     embedding_encoding = "cl100k_base"
