@@ -8,8 +8,8 @@
 
 cd $project/embedding_detection/openai_embedding_content_anomaly_detection
 # module purge
-source ./pyscipy/bin/activate
-# module load python/3.11 scipy-stack
+module load python/3.11 scipy-stack
+source ./py311/bin/activate
 # source ./pyscipy/bin/activate
 
-python data_preprocess.py
+python data_preprocess_iot23.py
