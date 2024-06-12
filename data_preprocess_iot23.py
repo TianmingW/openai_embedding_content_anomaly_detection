@@ -70,7 +70,7 @@ def get_embeddings_from_payload(df, embedding_model = "text-embedding-ada-002"):
 
     df_embedding = pd.DataFrame()
     df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
-    df_embedding["y"] = df['label'].apply(lambda x: 0 if x == "benign" else 1)
+    df_embedding["y"] = df['label'].apply(lambda x: 0 if x == "Benign" else 1)
     return df_embedding
 
 if __name__ == "__main__":
