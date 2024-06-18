@@ -1,0 +1,125 @@
+Capture directory CTU-IoT-Malware-Capture-34-1
+
+Pcap file name ./iot23/CTU-IoT-Malware-Capture-34-1/2018-12-21-15-50-14-192_c.csv
+
+Label file ./iot23/CTU-IoT-Malware-Capture-34-1/bro/conn.log.labeled, and start get label file
+
+./iot23/CTU-IoT-Malware-Capture-34-1/bro/conn.log.labeled ./iot23/CTU-IoT-Malware-Capture-34-1/2018-12-21-15-50-14-192_c.csv
+The label file path is ./iot23/CTU-IoT-Malware-Capture-34-1/bro/conn.log.labeled
+ The pcap file path is ./iot23/CTU-IoT-Malware-Capture-34-1/2018-12-21-15-50-14-192_c.csv
+Embeddings saved to ./iot23/CTU-IoT-Malware-Capture-34-1/embeddings.csv
+
+Capture directory CTU-IoT-Malware-Capture-35-1
+
+Pcap file name ./iot23/CTU-IoT-Malware-Capture-35-1/2018-12-21-15-33-59-192_c.csv
+
+Label file ./iot23/CTU-IoT-Malware-Capture-35-1/bro/conn.log.labeled, and start get label file
+
+./iot23/CTU-IoT-Malware-Capture-35-1/bro/conn.log.labeled ./iot23/CTU-IoT-Malware-Capture-35-1/2018-12-21-15-33-59-192_c.csv
+Traceback (most recent call last):
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_transports/default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_transports/default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 216, in handle_request
+    raise exc from None
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 196, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 143, in handle_request
+    raise exc
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 113, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 186, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 238, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 887, in _request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_transports/default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/Compiler/gcccore/python/3.11.5/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/timi001/.local/lib/python3.11/site-packages/httpx/_transports/default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/data_preprocess_iot23.py", line 107, in <module>
+    transformed_df = get_embeddings_from_payload(df)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/data_preprocess_iot23.py", line 72, in get_embeddings_from_payload
+    df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages/pandas/core/series.py", line 4765, in apply
+    ).apply()
+      ^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages/pandas/core/apply.py", line 1201, in apply
+    return self.apply_standard()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages/pandas/core/apply.py", line 1281, in apply_standard
+    mapped = obj._map_values(
+             ^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages/pandas/core/base.py", line 921, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action, convert=convert)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v3/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages/pandas/core/algorithms.py", line 1812, in map_array
+    return lib.map_infer(values, mapper, convert=convert)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "lib.pyx", line 2917, in pandas._libs.lib.map_infer
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/data_preprocess_iot23.py", line 72, in <lambda>
+    df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/6002403/timi001/embedding_detection/openai_embedding_content_anomaly_detection/data_preprocess_iot23.py", line 57, in get_embedding
+    return client.embeddings.create(input = [text], model=model).data[0].embedding
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/resources/embeddings.py", line 103, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 1112, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 859, in request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 911, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 982, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 911, in _request
+    return self._retry_request(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 982, in _retry_request
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "/home/timi001/.local/lib/python3.11/site-packages/openai/_base_client.py", line 921, in _request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.
