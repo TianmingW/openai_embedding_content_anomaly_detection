@@ -64,9 +64,9 @@ def get_embeddings_from_payload(df, embedding_model = "text-embedding-ada-002"):
     
     encoding = tiktoken.get_encoding(embedding_encoding)
     df["n_tokens"] = df.tokenizer_content.apply(lambda x: len(encoding.encode(x)))
-    # top_n = 100
-    # df = df[df.n_tokens <= max_tokens].tail(top_n)
-    df = df[df.n_tokens <= max_tokens]
+    top_n = 10
+    df = df[df.n_tokens <= max_tokens].head(top_n)
+    # df = df[df.n_tokens <= max_tokens]
 
     df_embedding = pd.DataFrame()
     df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
@@ -86,7 +86,11 @@ if __name__ == "__main__":
     # Set the folder path
     
     capture_dirs = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
-    capture_dirs = ['CTU-IoT-Malware-Capture-34-1', 'CTU-IoT-Malware-Capture-35-1', 'CTU-IoT-Malware-Capture-43-1']
+    capture_dirs = [
+        # 'CTU-IoT-Malware-Capture-34-1'
+        'CTU-IoT-Malware-Capture-35-1'
+        # 'CTU-IoT-Malware-Capture-43-1'
+        ]
 
     for capture_dir in capture_dirs:
         print(f"Capture directory {capture_dir}\n")
@@ -107,8 +111,8 @@ if __name__ == "__main__":
             transformed_df = get_embeddings_from_payload(df)
             print(f"The label file path is {label_path}\n", f"The pcap file path is {pcap_path}")
             # Save the transformed data
-            save_path = os.path.join(base_directory, capture_dir, "embeddings.csv")
-            transformed_df.to_csv(save_path, index=False)
+            save_path = os.path.join(base_directory, capture_dir, "embeddings.h5")
+            transformed_df.to_hdf(save_path, key='df', mode='a', complevel=5)
             print(f"Embeddings saved to {save_path}\n")
         else:
             print(f"Required files not found in {capture_dir}")
