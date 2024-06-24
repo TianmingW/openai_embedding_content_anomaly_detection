@@ -17,7 +17,7 @@ def get_labeled_df(label_file, packet_file):
         'resp_pkts', 'resp_ip_bytes', 'tunnel_parents_label_detailed-label'
     ]
 
-    print(label_file, packet_file)
+    # print(label_file, packet_file)
 
     # Load data and preprocess
     df = pd.read_csv(
@@ -47,7 +47,6 @@ def get_labeled_df(label_file, packet_file):
 
 
 def tokenizer_payload(hex_string, token_length = 4):
-    # token_length = 4 
     # new token length according to the max tokens for the embedding; which is original 6   
     regex_pattern = '.{1,' + str(token_length) + '}'
     return ' '.join(re.findall(regex_pattern, hex_string))
@@ -64,9 +63,10 @@ def get_embeddings_from_payload(df, embedding_model = "text-embedding-ada-002"):
     
     encoding = tiktoken.get_encoding(embedding_encoding)
     df["n_tokens"] = df.tokenizer_content.apply(lambda x: len(encoding.encode(x)))
-    top_n = 10
-    df = df[df.n_tokens <= max_tokens].head(top_n)
-    # df = df[df.n_tokens <= max_tokens]
+    # For configuration
+    # top_n = 10
+    # df = df[df.n_tokens <= max_tokens].head(top_n)
+    df = df[df.n_tokens <= max_tokens]
 
     df_embedding = pd.DataFrame()
     df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
@@ -88,12 +88,12 @@ if __name__ == "__main__":
     capture_dirs = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
     capture_dirs = [
         # 'CTU-IoT-Malware-Capture-34-1'
-        'CTU-IoT-Malware-Capture-35-1'
-        # 'CTU-IoT-Malware-Capture-43-1'
+        'CTU-IoT-Malware-Capture-35-1',
+        'CTU-IoT-Malware-Capture-43-1'
         ]
 
     for capture_dir in capture_dirs:
-        print(f"Capture directory {capture_dir}\n")
+        print(f"Capture directory {capture_dir}")
 
         pcap_path = None
         label_path = os.path.join(base_directory, capture_dir, "bro", "conn.log.labeled")
@@ -104,8 +104,8 @@ if __name__ == "__main__":
                 pcap_path = os.path.join(base_directory, capture_dir, file)
                 break
         if pcap_path and os.path.exists(label_path):
-            print(f"Pcap file name {pcap_path}\n")
-            print(f"Label file {label_path}, and start get label file\n")
+            print(f"Pcap file name {pcap_path}")
+            print(f"Label file {label_path}, and start get label file")
 
             df = get_labeled_df(label_path, pcap_path)
             transformed_df = get_embeddings_from_payload(df)

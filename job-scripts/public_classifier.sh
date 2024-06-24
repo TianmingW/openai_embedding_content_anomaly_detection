@@ -12,4 +12,4 @@ module load python/3.11 scipy-stack
 # source ./pyscipy/bin/activate
 source tensorflow/bin/activate
 
-python content_classifier.py
+python content_classifier_iot23.py
