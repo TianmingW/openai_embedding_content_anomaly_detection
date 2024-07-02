@@ -12,6 +12,7 @@ from sklearn.metrics import confusion_matrix
 import os
 import glob
 import numpy as np
+import sys
 
 # Prepare the datasets
 # data_set = pd.DataFrame()
@@ -70,6 +71,9 @@ model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
+# Reading the iteration number from command line
+iteration = sys.argv[1] if len(sys.argv) > 1 else 1
+
 history = model.fit(X_train_3d, 
                     y_train, 
                     epochs=50, 
@@ -80,4 +84,7 @@ history = model.fit(X_train_3d,
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
-history_df.to_csv('./result_iot23/cm_1.csv', index=False)
+
+# Use the iteration number in the filename
+output_filename = f'./result_iot23/cm_{iteration}.csv'
+history_df.to_csv(output_filename, index=False)
