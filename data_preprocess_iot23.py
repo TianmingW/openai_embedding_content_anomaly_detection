@@ -70,6 +70,11 @@ def get_embeddings_from_payload(df, embedding_model = "text-embedding-ada-002"):
 
     df_embedding = pd.DataFrame()
     df_embedding["X"] = df.tokenizer_content.apply(lambda x: get_embedding(x, model=embedding_model))
+
+    expanded_df = pd.DataFrame(df_embedding['X'].tolist())
+    expanded_df.columns = [f'Feature_{i}' for i in range(expanded_df.shape[1])]
+    df_embedding = pd.concat([df_embedding.drop(columns=['X']), expanded_df], axis=1)
+
     df_embedding["y"] = df['label'].apply(lambda x: 0 if x == "Benign" else 1)
     return df_embedding
 
@@ -88,8 +93,9 @@ if __name__ == "__main__":
     capture_dirs = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
     capture_dirs = [
         # 'CTU-IoT-Malware-Capture-34-1'
-        'CTU-IoT-Malware-Capture-35-1',
-        'CTU-IoT-Malware-Capture-43-1'
+        'CTU-IoT-Malware-Capture-35-1'
+        # 'CTU-IoT-Malware-Capture-43-1'
+        # 'CTU-Honeypot-Capture-4-1'
         ]
 
     for capture_dir in capture_dirs:

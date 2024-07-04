@@ -19,7 +19,7 @@ def getContent(src, dst):
 
 def main(args):
 	if args.file:
-		getContent(args.file, os.path.dirname(args.file))
+		getContent(args.file, os.path.dirname(args.file)+'/')
 		print("Finished processing:", args.file)
 	elif args.src and args.dst:
 		# If a source directory and destination directory are specified, process all files
