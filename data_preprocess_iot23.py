@@ -90,10 +90,10 @@ if __name__ == "__main__":
     
     # Set the folder path
     
-    capture_dirs = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
+    # capture_dirs = [d for d in os.listdir(base_directory) if os.path.isdir(os.path.join(base_directory, d))]
     capture_dirs = [
         # 'CTU-IoT-Malware-Capture-34-1'
-        # 'CTU-IoT-Malware-Capture-35-1'
+        # 'CTU-IoT-Malware-Capture-35-1',
         # 'CTU-IoT-Malware-Capture-43-1'
         'CTU-Honeypot-Capture-5-1'
         ]
