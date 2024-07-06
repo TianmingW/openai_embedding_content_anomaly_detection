@@ -56,8 +56,7 @@ def get_embedding(text, model="text-embedding-ada-002"):
    return client.embeddings.create(input = [text], model=model).data[0].embedding
 
 def get_embeddings_from_payload(df, embedding_model = "text-embedding-ada-002"):
-    df.dropna(subset = ['tcp.payload'], inplace=True)
-    df['tokenizer_content'] = df['tcp.payload'].apply(tokenizer_payload)
+    df['tokenizer_content'] = df['tcp.payload'].dropna().apply(tokenizer_payload)
 
     max_tokens = 8000
     

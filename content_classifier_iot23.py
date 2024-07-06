@@ -25,11 +25,29 @@ import sys
 #     all_df.append(df_temp)
 # data_set = pd.concat(all_df, ignore_index=True)
 
-file_path = "iot23/CTU-IoT-Malware-Capture-34-1/embeddings.csv"
-data_set = pd.read_csv(file_path)
-data_set["X"] = data_set.X.apply(eval).apply(np.array)
+file_list = [
+    "./iot23/CTU-Honeypot-Capture-5-1/embeddings.h5",
+    "./iot23/CTU-IoT-Malware-Capture-34-1/embeddings.h5"
+]
+data_set = pd.DataFrame()
+for h5_file in file_list:
+    h5 = pd.HDFStore(h5_file)
+    df = h5['/df']
+    data_set.append(df, ignore_index = True)
 
-X_train, X_test, y_train, y_test = train_test_split(data_set["X"], data_set["y"], test_size=0.2, random_state=42)
+data_benign = data_set[data_set[-1] == 0]
+data_attack = data_set[data_set[-1] == 1]
+
+data_benign['X'] = data_benign[:-1].apply(lambda row: row.tolist(), axis=1)
+data_attack['X'] = data_attack[:-1].apply(lambda row: row.tolist(), axis=1)
+
+X_train_b, X_test_b, y_train_b, y_test_b = train_test_split(data_benign["X"], data_benign[-1], test_size=0.2, random_state=42)
+X_train_a, X_test_a, y_train_a, y_test_a = train_test_split(data_attack["X"], data_attack[-1], test_size=0.2, random_state=42)
+
+X_train = pd.concat([X_train_b, X_train_a], ignore_index=True)
+X_test = pd.concat([X_test_b, X_test_a], ignore_index=True)
+y_train = pd.concat([y_train_b, y_train_a], ignore_index=True)
+y_test = pd.concat([y_test_b, y_test_a], ignore_index=True)
 
 X_train_array = X_train.to_numpy()
 X_train_3d = np.stack([x.reshape(-1, 1) for x in X_train_array])
@@ -86,5 +104,5 @@ history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
 
 # Use the iteration number in the filename
-output_filename = f'./result_iot23/cm_{iteration}.csv'
-history_df.to_csv(output_filename, index=False)
+output_filename = f'./result_iot23/cm_0705_{iteration}.h5'
+history_df.to_hdf(output_filename, key='df', mode='a', complevel=5)
