@@ -33,26 +33,28 @@ data_set = pd.DataFrame()
 for h5_file in file_list:
     h5 = pd.HDFStore(h5_file)
     df = h5['/df']
-    data_set.append(df, ignore_index = True)
+    h5.close()
+    data_set = pd.concat([data_set, df], ignore_index = True)
 
-data_benign = data_set[data_set[-1] == 0]
-data_attack = data_set[data_set[-1] == 1]
+data_benign = data_set[data_set['y'] == 0]
+data_attack = data_set[data_set['y'] == 1]
 
-data_benign['X'] = data_benign[:-1].apply(lambda row: row.tolist(), axis=1)
-data_attack['X'] = data_attack[:-1].apply(lambda row: row.tolist(), axis=1)
+y_benign = data_benign["y"]
+y_attack = data_attack["y"]
 
-X_train_b, X_test_b, y_train_b, y_test_b = train_test_split(data_benign["X"], data_benign[-1], test_size=0.2, random_state=42)
-X_train_a, X_test_a, y_train_a, y_test_a = train_test_split(data_attack["X"], data_attack[-1], test_size=0.2, random_state=42)
+X_benign= data_benign.drop(columns = ["y"]).apply(lambda row: row.tolist(), axis=1)
+X_attack = data_attack.drop(columns = ["y"]).apply(lambda row: row.tolist(), axis=1)
+
+X_train_b, X_test_b, y_train_b, y_test_b = train_test_split(X_benign, y_benign, test_size=0.2, random_state=42)
+X_train_a, X_test_a, y_train_a, y_test_a = train_test_split(X_attack, y_attack, test_size=0.2, random_state=42)
 
 X_train = pd.concat([X_train_b, X_train_a], ignore_index=True)
 X_test = pd.concat([X_test_b, X_test_a], ignore_index=True)
 y_train = pd.concat([y_train_b, y_train_a], ignore_index=True)
 y_test = pd.concat([y_test_b, y_test_a], ignore_index=True)
 
-X_train_array = X_train.to_numpy()
-X_train_3d = np.stack([x.reshape(-1, 1) for x in X_train_array])
-X_test_array = X_test.to_numpy()
-X_test_3d = np.stack([x.reshape(-1, 1) for x in X_test_array])
+X_train_3d = np.stack([np.array(x).reshape(-1, 1) for x in X_train])
+X_test_3d = np.stack([np.array(x).reshape(-1, 1) for x in X_test])
 
 # Set stop when converged
 early_stopping = EarlyStopping(
