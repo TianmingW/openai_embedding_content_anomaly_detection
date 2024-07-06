@@ -51,8 +51,10 @@ if __name__ == "__main__":
     max_tokens = 8000
     # top_n = 100
     # Set the folder path
-    folder_path = './DoS_tcp_flood_csv/'  # Replace with your folder path
-    save_path = "./DoS_tcp_flood_embedding/"
+    # folder_path = './DoS_tcp_flood_csv/'
+    # save_path = "./DoS_tcp_flood_embedding/"
+    folder_path = './iot23/CTU-Honeypot-Capture-5-1/'
+    save_path = "./iot23/CTU-Honeypot-Capture-5-1/bro/"
 
     # Iterate over all CSV files in the folders
     for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
