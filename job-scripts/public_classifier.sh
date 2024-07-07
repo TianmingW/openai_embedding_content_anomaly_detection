@@ -16,7 +16,7 @@ source ./py311/bin/activate
 # Number of runs you want to execute
 N=3
 
-for i in $(seq 1 $N)
+for i in $(seq 2 $((N+1)))
 do
     echo "Running iteration $i"
     python content_classifier_iot23.py $i

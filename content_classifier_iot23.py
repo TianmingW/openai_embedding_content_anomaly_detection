@@ -112,7 +112,7 @@ class ConfusionMatrixCallback(Callback):
 cm_callback = ConfusionMatrixCallback(X_test_3d, y_test)
 
 from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
-checkpoint = ModelCheckpoint('./model_best.h5', save_best_only=True)
+checkpoint = ModelCheckpoint('./model_best.keras', save_best_only=True)
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5)
 callbacks=[early_stopping, checkpoint, reduce_lr, cm_callback]
 
