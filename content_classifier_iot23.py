@@ -9,6 +9,7 @@ from keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.callbacks import Callback
 from sklearn.metrics import confusion_matrix
+from keras.optimizers import Adam
 import os
 import glob
 import numpy as np
@@ -110,12 +111,25 @@ class ConfusionMatrixCallback(Callback):
         logs['val_TP'] = TP
 cm_callback = ConfusionMatrixCallback(X_test_3d, y_test)
 
+from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
+checkpoint = ModelCheckpoint('./model_best.h5', save_best_only=True)
+reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5)
+callbacks=[early_stopping, checkpoint, reduce_lr, cm_callback]
+
+
 # Train the model
 model = Sequential()
 model.add(LSTM(100))
+model.add(LSTM(100))
 model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+model.compile(
+    loss='binary_crossentropy', 
+    optimizer=Adam(learning_rate=0.001), 
+    metrics=['accuracy', 'Precision', 'Recall'])
+
 
 # Reading the iteration number from command line
 iteration = sys.argv[1] if len(sys.argv) > 1 else 1
@@ -126,7 +140,8 @@ history = model.fit(X_train_3d,
                     batch_size=64,
                     shuffle=True, 
                     validation_data=(X_test_3d, y_test),
-                    callbacks=[early_stopping, cm_callback])
+                    callbacks=[early_stopping, checkpoint, reduce_lr, cm_callback])
+
 
 history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
