@@ -120,7 +120,7 @@ callbacks=[early_stopping, checkpoint, reduce_lr, cm_callback]
 # Train the model
 model = Sequential()
 model.add(LSTM(100))
-model.add(LSTM(100))
+# model.add(LSTM(100))
 model.add(Dropout(0.2))
 model.add(Dense(1, activation='sigmoid'))
 # model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
