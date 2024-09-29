@@ -1,2 +1,0 @@
-/localscratch/spool/slurmd/job34570091/slurm_script: line 15: 1851732 Killed                  python data_preprocess_iot23.py
-slurmstepd: error: Detected 1 oom_kill event in StepId=34570091.batch. Some of the step tasks have been OOM Killed.

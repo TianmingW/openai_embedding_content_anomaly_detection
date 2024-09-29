@@ -27,3 +27,4 @@ iot_23_embeddings/
 py311/
 plot_result_iot23.ipynb
 plot_result_public.ipynb
+iot_23_log/
