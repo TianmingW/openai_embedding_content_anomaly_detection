@@ -25,3 +25,5 @@ py310/
 DoS_tcp_flood_embedding/
 iot_23_embeddings/
 py311/
+plot_result_iot23.ipynb
+plot_result_public.ipynb
