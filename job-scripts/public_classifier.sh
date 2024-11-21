@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --mem=32G
+#SBATCH --mem=128G
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH --time=72:0:0
-#SBATCH --mail-user=wangmaine@gmail.comß
+#SBATCH --mail-user=wangmaine@gmail.com
 #SBATCH --mail-type=ALL
 
 cd $project/embedding_detection/openai_embedding_content_anomaly_detection

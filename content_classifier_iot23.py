@@ -14,6 +14,7 @@ import os
 import glob
 import numpy as np
 import sys
+from sklearn.utils import shuffle
 
 # Prepare the datasets
 data_set = pd.DataFrame()
@@ -77,6 +78,8 @@ X_train = pd.concat([X_train_b, X_train_a])
 X_test = pd.concat([X_test_b, X_test_a])
 y_train = pd.concat([y_train_b, y_train_a])
 y_test = pd.concat([y_test_b, y_test_a])
+
+X_train, y_train = shuffle(X_train, y_train, random_state=42)
 
 X_train_array = X_train.to_numpy()
 X_train_3d = np.stack([x.reshape(-1, 1) for x in X_train_array])
@@ -147,5 +150,5 @@ history_df = pd.DataFrame(history.history)
 history_df['epoch'] = range(1, len(history_df) + 1)
 
 # Use the iteration number in the filename
-output_filename = f'./result_iot23/cm_0705_{iteration}.h5'
-history_df.to_hdf(output_filename, key='df', mode='a', complevel=5)
+output_filename = f'./result_iot23/cm_1120_{iteration}.csv'
+history_df.to_csv(output_filename)
